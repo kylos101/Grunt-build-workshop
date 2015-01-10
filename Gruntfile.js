@@ -21,6 +21,8 @@ module.exports = function(grunt) {
 
   // load node packages that are grunt plugins
   grunt.loadNpmTasks('grunt-contrib-concat');
+  // Note for the reader: concatentation is an alternative to require.js or common.js
+  // concatentation is for small to medium stuff...be pragmatic.
 
   // a default task (so you don't have to specify one at the CLI)
   grunt.registerTask('default', ['concat']);

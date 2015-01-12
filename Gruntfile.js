@@ -15,12 +15,28 @@ module.exports = function(grunt) {
         ]
       }
     },
+    less: {
+      // every task can have an options object, it can live in children too (like for an override)
+      app: {
+        dest: "generated/css/style.css",
+        src: "css/style.less"
+      },
+      options: {
+        paths: ["css"],
+        ieCompat: true
+      }
+    },
+    // we have two workflows, one for JS, and another for CSS
     watch: {
       // notice how watch.app.files (below) self-references concat.app.src (above)
-      // what this does: when a change occurs, it runs the concat task.
-      app: {
+      // what this does: when a change occurs in any file in that list, it runs the concat task.
+      js: {
         files: ["<%= concat.app.src %>"],
         tasks: ["concat"]
+      },
+      css: {
+        files: ["<%= less.app.src %>"],
+        tasks: ["less"]
       }
     }
   }
@@ -34,11 +50,12 @@ module.exports = function(grunt) {
   // load node packages that are grunt plugins
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-less');
   // Note for the reader: concatentation is an alternative to require.js or common.js
   // concatentation is for small to medium stuff...be pragmatic.
 
-  // a default task (so you don't have to specify one at the CLI)
-  grunt.registerTask('default', ['concat','watch']);
+  // a default task (so you don't have to specify one at the CLI); watch should be last.
+  grunt.registerTask('default', ['less','concat','watch']);
 
   //TODO: Unit tests, JS LINT, other.z
 };

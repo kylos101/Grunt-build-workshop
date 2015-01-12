@@ -1,2 +1,1 @@
-var foo = "test";
-return foo;
+var foo = "vendorJsTest";

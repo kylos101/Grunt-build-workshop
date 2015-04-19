@@ -1,5 +1,7 @@
 @import "_mixins.less";
 
-body {
+/* an invalid folder will break the build! cool. */
+/* an invalid file in an existing folder will not break the build...bummer */
+body.default{
   background-image: data-uri("../img/background.png")
 }

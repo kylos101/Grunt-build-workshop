@@ -1,7 +1,15 @@
 @import "_mixins.less";
 
-/* an invalid folder will break the build! cool. */
-/* an invalid file in an existing folder will not break the build...bummer */
-body.default{
-  background-image: data-uri("../img/background.png")
+// Some grunt tips
+// a folder that does not exist will break the build! cool.
+// a file that does not exist will not break the build...bummer
+
+// this is a LESS function...hurray for DRY!
+.page-defaults (@page) {
+  body.default.@{page} {
+    background-image: data-uri("../img/backgrounds/@{page}.png");
+  }
 }
+
+// call the above function to wire-up home page style
+.page-defaults(home);
